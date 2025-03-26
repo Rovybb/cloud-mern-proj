@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -32,11 +32,7 @@ const BookList: React.FC = () => {
   const [genre, setGenre] = useState('');
   const { token } = useAuth();
 
-  useEffect(() => {
-    fetchBooks();
-  }, [token, search, genre]);
-
-  const fetchBooks = async () => {
+  const fetchBooks = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
@@ -47,7 +43,11 @@ const BookList: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [search, genre, token]);
+
+  useEffect(() => {
+    fetchBooks();
+  }, [fetchBooks]);
 
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this book?')) {
