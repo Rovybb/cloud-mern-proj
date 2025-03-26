@@ -31,7 +31,12 @@ const Home = () => {
         >
           Manage Books
         </Button>
-        {/* Add more navigation buttons here as needed */}
+        <Button
+          onClick={() => navigate('/movies')}
+          className="h-32 text-lg cursor-pointer"
+        >
+          Discover Movies
+        </Button>
       </div>
     </div>
   );

@@ -6,6 +6,8 @@ import Home from "@/components/Home";
 import BookList from "@/components/books/BookList";
 import CreateBook from "@/components/books/CreateBook";
 import EditBook from "@/components/books/EditBook";
+import DiscoverMovie from "@/components/movies/DiscoverMovie";
+import SearchMovie from "@/components/movies/SearchMovie";
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -48,6 +50,22 @@ export const AppRouter = () => {
         element={
           <PrivateRoute>
             <EditBook />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/movies"
+        element={
+          <PrivateRoute>
+            <DiscoverMovie />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/movies/search"
+        element={
+          <PrivateRoute>
+            <SearchMovie />
           </PrivateRoute>
         }
       />
