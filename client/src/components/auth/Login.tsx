@@ -32,7 +32,7 @@ const Login: React.FC = () => {
     setIsLoading(true);
     try {
       await loginService.login(formData);
-      navigate('/dashboard');
+      navigate('/');
     } catch (err: unknown) {
       const error = err as AuthError;
       if (error.response?.data?.message) {

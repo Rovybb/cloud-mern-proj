@@ -1,47 +1,38 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { loginService } from '@/services/auth/loginService';
-import BookList from './books/BookList';
+import { useAuth } from '@/hooks/useAuth';
 
-const Home: React.FC = () => {
+const Home = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
-  const handleLogout = async () => {
-    try {
-      await loginService.logout();
-      navigate('/login');
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation Bar */}
-      <nav className="border-b">
-        <div className="container flex h-16 items-center px-4">
-          <div className="flex items-center space-x-4">
-            <h1 className="text-xl font-bold">API Management</h1>
-            <div className="flex items-center space-x-2">
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
-                Books
-              </Button>
-              {/* Add more API sections here */}
-            </div>
-          </div>
-          <div className="ml-auto flex items-center space-x-4">
-            <Button variant="outline" onClick={handleLogout}>
-              Logout
-            </Button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <main className="container py-6">
-        <BookList />
-      </main>
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Welcome to API Management</h1>
+        <Button 
+          onClick={handleLogout}
+          variant="outline"
+          className="cursor-pointer"
+        >
+          Logout
+        </Button>
+      </div>
+      
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Button 
+          onClick={() => navigate('/books')}
+          className="h-32 text-lg cursor-pointer"
+        >
+          Manage Books
+        </Button>
+        {/* Add more navigation buttons here as needed */}
+      </div>
     </div>
   );
 };

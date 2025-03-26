@@ -67,7 +67,7 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
     if (!user) {
       console.log('Login failed: User not found:', email);
-      res.status(400).json({ message: 'Invalid credentials' });
+      res.status(400).json({ message: 'Invalid email or password' });
       return;
     }
 
@@ -75,7 +75,7 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       console.log('Login failed: Invalid password for user:', email);
-      res.status(400).json({ message: 'Invalid credentials' });
+      res.status(400).json({ message: 'Invalid email or password' });
       return;
     }
 
