@@ -3,21 +3,32 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db';
 import authRoutes from './routes/authRoutes';
+import bookRoutes from './routes/bookRoutes';
+import { auth } from './middleware/auth';
 
-dotenv.config();
+const result = dotenv.config();
+
+if (result.error) {
+  console.error('Error loading .env:', result.error);
+} else {
+  console.log('Successfully loaded .env');
+}
+
+console.log('Environment variables loaded:', {
+  PORT: process.env.PORT,
+  MONGODB_URI: process.env.MONGODB_URI ? 'Set' : 'Not set',
+  JWT_SECRET: process.env.JWT_SECRET ? 'Set' : 'Not set'
+});
 
 const app = express();
 
-// Connect to MongoDB
 connectDB();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Routes
 app.use('/api/auth', authRoutes);
-
+app.use('/api/books', auth, bookRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

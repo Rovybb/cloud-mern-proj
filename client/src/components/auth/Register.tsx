@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { RegisterRequest, AuthError } from '../types/auth';
-import { registerService } from '../services/auth/registerService';
+import { RegisterRequest, AuthError } from '../../types/auth';
+import { registerService } from '../../services/auth/registerService';
 
 interface RegisterError {
   message: string;

@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { LoginRequest, AuthError } from '../types/auth';
-import { loginService } from '../services/auth/loginService';
+import { LoginRequest, AuthError } from '../../types/auth';
+import { loginService } from '../../services/auth/loginService';
 
 interface LoginError {
   message: string;

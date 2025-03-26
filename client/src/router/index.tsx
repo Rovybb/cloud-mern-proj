@@ -1,7 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
-import Login from '../components/Login';
-import Register from '../components/Register';
+import { useAuth } from '@/hooks/useAuth';
+import Login from '@/components/auth/Login';
+import Register from '@/components/auth/Register';
+import Home from '@/components/Home';
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -17,7 +18,7 @@ export const AppRouter = () => {
         path="/dashboard"
         element={
           <PrivateRoute>
-            <></>
+            <Home />
           </PrivateRoute>
         }
       />
