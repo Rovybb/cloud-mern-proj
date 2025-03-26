@@ -83,12 +83,7 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
     const token = generateToken(user._id as string);
 
     const response = {
-      user: {
-        id: user._id,
-        email: user.email,
-        name: user.name,
-      },
-      token,
+      token
     };
     console.log('Login successful:', { userId: user._id, email: user.email });
     res.json(response);

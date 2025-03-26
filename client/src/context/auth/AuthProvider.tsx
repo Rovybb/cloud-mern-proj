@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { User } from '../../types/auth';
 import { AuthContext } from './AuthContext';
+import { loginService } from '@/services/auth/loginService';
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token);
 
-  const login = (userData: User, token: string) => {
+  const login = async (userData: User) => {
+    const data = await loginService.login(userData);
     setUser(userData);
     setToken(token);
     setIsAuthenticated(true);
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', data.token);
   };
 
   const logout = () => {

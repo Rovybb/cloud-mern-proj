@@ -117,7 +117,7 @@ const Register: React.FC = () => {
                   <p className="text-sm text-destructive text-center">{error.message}</p>
                 )}
               </CardContent>
-              <CardFooter className="flex flex-col space-y-4">
+              <CardFooter className="flex flex-col space-y-4 pt-4">
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? "Creating account..." : "Create account"}
                 </Button>

@@ -40,7 +40,7 @@ const BookList: React.FC = () => {
     try {
       setIsLoading(true);
       setError(null);
-      const data = await bookService.getBooks(search, genre, token || '');
+      const data = await bookService.getBooks(search, genre, token || localStorage.getItem('token') || '');
       setBooks(data as BookResponse[]);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch books');

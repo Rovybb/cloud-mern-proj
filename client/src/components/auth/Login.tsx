@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { LoginRequest, AuthError } from '../../types/auth';
-import { loginService } from '../../services/auth/loginService';
+import { useAuth } from '@/hooks/useAuth';
 
 interface LoginError {
   message: string;
@@ -13,6 +13,8 @@ interface LoginError {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
+  
   const [formData, setFormData] = useState<LoginRequest>({
     email: '',
     password: ''
@@ -31,7 +33,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await loginService.login(formData);
+      await login(formData as LoginRequest);
       navigate('/');
     } catch (err: unknown) {
       const error = err as AuthError;
@@ -104,7 +106,7 @@ const Login: React.FC = () => {
                   <p className="text-sm text-destructive text-center">{error.message}</p>
                 )}
               </CardContent>
-              <CardFooter className="flex flex-col space-y-4">
+              <CardFooter className="flex flex-col space-y-4 pt-4">
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? "Signing in..." : "Sign in"}
                 </Button>
